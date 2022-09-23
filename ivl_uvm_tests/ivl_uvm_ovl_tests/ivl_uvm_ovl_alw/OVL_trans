@@ -1,4 +1,4 @@
-all: clean ovl_even_parity_pass ovl_even_parity_fail help
+all: clean pass fail
 
 
 ovl_even_parity_pass: 
