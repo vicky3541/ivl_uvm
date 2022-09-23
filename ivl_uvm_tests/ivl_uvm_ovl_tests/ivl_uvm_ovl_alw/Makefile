@@ -1,6 +1,7 @@
 all:
 	make --no-print-directory -f OVL_trans
 	make --no-print-directory -f OVL_unchange
+	make --no-print-directory -f OVL_zero_one_hot
 	
 
 clean:
@@ -9,6 +10,7 @@ clean:
 help:
 	make --no-print-directory -f OVL_trans help
 	make --no-print-directory -f OVL_unchange  help
+	make --no-print-directory -f OVL_zero_one_hot  help
 	
 
 
