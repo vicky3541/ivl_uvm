@@ -1,21 +1,14 @@
-all: clean pass fail
+all:
+	make --no-print-directory -f OVL_trans
+	make --no-print-directory -f OVL_unchange
+	
 
-pass: 
-	iverilog -g2012 -s test -I${IVL_UVM_HOME}/ivl_uvm_std_ovl/ -f flist ivl_uvm_ovl_trans_pass.sv >& pass_comp.log
-	#iverilog -s test -I../../ivl_uvm_std_ovl/ ../../ivl_uvm_std_ovl/ivl_uvm_ovl_inc.v ivl_uvm_ovl_ex.sv |& tee comp.log
-	vvp a.out >& pass_run.log
-
-fail: 
-	iverilog -g2012 -s test -I${IVL_UVM_HOME}/ivl_uvm_std_ovl/ -f flist ivl_uvm_ovl_trans_Fail.sv >& fail_comp.log
-	vvp a.out >& fail_run.log
-
-pass: 
-	iverilog -g2012 -s test -I${IVL_UVM_HOME}/ivl_uvm_std_ovl/ -f flist ivl_uvm_ovl_unchange_pass.sv >& pass_comp.log
-	#iverilog -s test -I../../ivl_uvm_std_ovl/ ../../ivl_uvm_std_ovl/ivl_uvm_ovl_inc.v ivl_uvm_ovl_ex.sv |& tee comp.log
-	vvp a.out >& pass_run.log
-
-fail: 
-	iverilog -g2012 -s test -I${IVL_UVM_HOME}/ivl_uvm_std_ovl/ -f flist ivl_uvm_ovl_unchabge_fail.sv >& fail_comp.log
-	vvp a.out >& fail_run.log
 clean:
-	rm -fr a.out *.log *.vcd tee
+	  rm -fr a.out *.log *.vcd tee
+
+help:
+	make --no-print-directory -f OVL_trans help
+	make --no-print-directory -f OVL_unchange  help
+	
+
+
