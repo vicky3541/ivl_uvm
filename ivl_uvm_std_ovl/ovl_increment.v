@@ -6,8 +6,8 @@
 `module ovl_increment (clock, reset, enable, test_expr, fire);
 
   parameter severity_level = `OVL_SEVERITY_DEFAULT;
-  parameter width          = 1;
-  parameter value          = 1;
+  parameter width          = 4;
+  parameter value          = 2;
   parameter property_type  = `OVL_PROPERTY_DEFAULT;
   parameter msg            = `OVL_MSG_DEFAULT;
   parameter coverage_level = `OVL_COVER_DEFAULT;
