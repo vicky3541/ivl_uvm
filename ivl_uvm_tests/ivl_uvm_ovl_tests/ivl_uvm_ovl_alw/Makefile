@@ -1,18 +1,15 @@
+SUBDIRS = $(shell ls -d */)
 all:
-	make --no-print-directory -f OVL_always
-	make --no-print-directory -f OVL_trans
-	make --no-print-directory -f OVL_unchange
-	make --no-print-directory -f OVL_zero_one_hot
-	
+	for dir in $(SUBDIRS) ; do \
+        	make --no-print-directory -C  $$dir ; \
+	done
 
 clean:
-	  rm -fr a.out *.log *.vcd tee
+	for dir in $(SUBDIRS) ; do \
+        	make --no-print-directory -C  $$dir clean;\
+	done
 
 help:
-	make --no-print-directory -f OVL_always help
-	make --no-print-directory -f OVL_trans help
-	make --no-print-directory -f OVL_unchange  help
-	make --no-print-directory -f OVL_zero_one_hot  help
-	
-
-
+	for dir in $(SUBDIRS) ; do \
+        	make --no-print-directory -C  $$dir help;\
+	done
