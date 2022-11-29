@@ -1,41 +1,33 @@
-`define number 190
-//`define number_1 5
-int error;
-//import uvm_pkg::*;
-`include "uvm_macros.svh"
-`include "fifo_if.sv"
-`include "fifo_trans.sv"
-`include "fifo_sequence.sv"
-`include "fifo_sequencer.sv"
-`include "fifo_dri.sv"
-`include "fifo_monitor_act.sv"
-`include "fifo_monitor_pas.sv"
-`include "fifo_agent_act.sv"
-`include "fifo_agent_pas.sv"
-`include "fifo_scoreboard.sv"
-`include "fifo_env.sv"
-`include "fifo_test.sv"
+// Code your testbench here
+// or browse Examples
+`timescale 1ns/1ns
 
-module uvm_top;
-  bit clk;
-  always #5 clk=~clk;
-  fifo_if i(clk);
-  //flow fsm(.in(i.in),.reset(i.reset),.out(i.out),.sysclk(sysclk));
-  fifo fifi(.data_in(i.data_in),.clk(clk),.rst_n(i.rst_n),.push(i.push),.pop(i.pop),.push_err_on_full(i.push_err_on_full),.pop_err_on_empty(i.pop_err_on_empty),.full(i.full),.empty(i.empty),.data_out(i.data_out));
+import uvm_pkg::*;
+`include "uvm_macros.svh"
+`include "fifo_file.svh"
+
+module fifo_top();
+  
+  logic clk;
+  initial begin : clk_gen
+   clk<=1'b0;
+   forever #5 clk= ~clk;
+   end : clk_gen
+  
+  fifo_if fifo_if0(.clk(clk));
+  
+  fifo fifo_1(.clk(fifo_if0.clk),.rst_n(fifo_if0.rst),.push(fifo_if0.push),.pop(fifo_if0.pop),.data_in(fifo_if0.data_in),.data_out(fifo_if0.data_out),.push_err_on_full(fifo_if0.push_err_on_full),.pop_err_on_empty(fifo_if0.pop_err_on_empty),.full(fifo_if0.full),.empty(fifo_if0.empty));
+  
+ initial begin 
+   uvm_config_db#(virtual fifo_if)::set(.cntxt(null),.inst_name("uvm_test_top.env_0.fifo_agent1"),.field_name("if_1"),.value(fifo_if0));
+   
+   run_test();
+ end
+   
   
   
-  initial
-    begin
-      uvm_config_db#(virtual fifo_if)::set(null,"","iface",i);
-    end
-  initial
-    begin
-      run_test("fifo_tb");
-    end
   
+  
+endmodule : fifo_top
     
-initial begin //to create vcd file for waveform viewing
-  $dumpfile("fifo.vcd");
-  $dumpvars;
-end
-endmodule
+    
