@@ -1,0 +1,15 @@
+module tb;
+ // int my_array [int];
+  integer my_array [integer];
+  
+  
+  initial begin
+   if(my_array.num() > 0)
+      $display("my array = %p" , my_array);
+    
+  end
+  
+endmodule  
+      
+      
+      
